@@ -1,0 +1,35 @@
+{
+  "name": "eon-forger",
+  "version": "1.0.0",
+  "description": "Utility funtions to handle Eon Forgers",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HorizenLabs/eon-forger.git"
+  },
+  "keywords": [
+    "Horizen",
+    "Eon",
+    "Forger",
+    "Stake"
+  ],
+  "author": "otoumas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HorizenLabs/eon-forger/issues"
+  },
+  "homepage": "https://github.com/HorizenLabs/eon-forger#readme",
+  "dependencies": {
+    "dotenv": "16.4.1",
+    "ethers": "6.10.0",
+    "web3": "4.4.0",
+    "web3-utils": "^4.1.1",
+    "web3-eth-accounts": "^4.1.1",
+    "ethereum-cryptography": "^2.0.0"
+  }
+}
