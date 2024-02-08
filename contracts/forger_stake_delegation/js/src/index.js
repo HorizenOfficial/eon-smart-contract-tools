@@ -136,7 +136,6 @@ const sign = (msg, web3, ownerPrivateKey) => {
   const r = signature.r.toString(16).padStart(64, "0");
   const s = signature.s.toString(16).padStart(64, "0");
   const v = signature.recovery + 27;
-
   return {
     message: msg,
     messageHash: hash,
@@ -150,6 +149,9 @@ const sign = (msg, web3, ownerPrivateKey) => {
 const prepareWithdrawData = async (web3, contract, callerAddress, stakeId, ownerPrivateKey) => {
   console.log("\nPreparing withdraw data...");
   let signature = process.env.OWNER_SIGNED_MESSAGE;
+  let v;
+  let r;
+  let s;
   if (!signature) {
     const nonce = await web3.eth.getTransactionCount(callerAddress);
     let nonce_s = nonce.toString(16);
@@ -160,14 +162,15 @@ const prepareWithdrawData = async (web3, contract, callerAddress, stakeId, owner
     console.log("Message to sign: " + msg);
     const signatureObject = sign(msg, web3, ownerPrivateKey);
     console.log("SignatureObject: " + JSON.stringify(signatureObject));
-
-    signature = signatureObject.signature;
+    v = signatureObject.v;
+    r = signatureObject.r;
+    s = signatureObject.s;
+  } else {
+    console.log('Signature: "'+ signature);
+    r = '0x'+signature.substring(2, 66);
+    s = '0x'+signature.substring(66,130);
+    v = '0x'+signature.substring(130,132);
   }
-
-  console.log('Signature: "'+ signature);
-  const r = '0x'+signature.substring(2, 66);
-  const s = '0x'+signature.substring(66,130);
-  const v = '0x'+signature.substring(130,132);
 
   return contract.methods.withdraw(stakeId, v, r, s).encodeABI();
 }

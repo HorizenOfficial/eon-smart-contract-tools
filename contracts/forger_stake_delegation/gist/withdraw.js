@@ -12,8 +12,7 @@
     const accounts = await web3.eth.getAccounts();
     const callerAddress = accounts[0];
     const ownerAddress = !OWNER_ADDRESS ? callerAddress : OWNER_ADDRESS;
-    const abi_str = require("./abi/forger_stake_delegation.json");
-    const abi = JSON.parse(abi_str);
+    const abi = require("./abi/forger_stake_delegation.json");
     const contract = new web3.eth.Contract(abi, address, {from: callerAddress});
 
     let signature = OWNER_SIGNED_MESSAGE;

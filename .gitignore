@@ -1,3 +1,2 @@
-
-/js/.env
-/js/node_modules/
+/contracts/*/js/.env
+/contracts/*/js/node_modules/
