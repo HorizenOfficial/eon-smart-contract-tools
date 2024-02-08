@@ -5,37 +5,58 @@
 Code to interact with the Eon sidechain forger stake delegation smart contract.
 
 It provides two different ways to interact with the smart contract:
-1. [gist](./gist) - A set of scripts that can be imported into the Remix IDE to interact with the smart contract.
-2. [js](./js) - A scripts that can be run using Node.js locally to interact with the smart contract.
+1. [remix](./remix) - A set of scripts that can be imported into the Remix IDE to interact with the smart contract.
+2. [js](./js) - A script that can be run using Node.js locally to interact with the smart contract.
 
-## Gist
+## Remix
 
-In order to use the scripts in the [gist](./gist) folder, you will need to import them into the Remix IDE. 
-The scripts are designed to be run in the Remix IDE and will interact with the smart contract using the injected Web3 provider.
-These scripts require a wallet (MetaMask) to be connected to the Remix IDE, and with _eon_ or _gobi_ networks added to the wallet.
+In order to use the scripts in the [remix](./remix) folder, you will need to import them into the [Web Remix IDE](https://remix.ethereum.org/). 
+The scripts are designed to be run in the web version of the Remix IDE as they require interaction with a wallet (MetaMask) 
+to sign the transactions.
+The MetaMask wallet needs to have [added _eon_ or _gobi_ networks](https://docs.horizen.io/horizen_eon/connect/connect_your_wallet/).
 
-Follow these steps in order to use the scripts in the [gist](./gist) folder:
-1. Clone this repository
-2. Open the [Remix IDE](https://remix.ethereum.org/)
-3. Create a new workspace
-4. Import the scripts from the [gist](./gist) folder
-5. Connect your wallet to the Remix IDE
-6. Add the _eon_ or _gobi_ network to your wallet
-7. Select injected provider in Remix IDE
+Follow these steps in order to use the scripts in the [remix](./remix) folder:
+1. Clone this repository or download as a zip and extract.
+2. Open the [Web Remix IDE](https://remix.ethereum.org/).
+3. Create a new workspace.
+
+    ![create_new_workspace](./docs/images/create_new_workspace.png)
+
+4. Import the scripts from the [remix](./remix) folder using the "upload folder" functionality.
+
+   ![upload_folder](./docs/images/upload_folder.png)
+
+5. [Add the _eon_ or _gobi_ network](https://docs.horizen.io/horizen_eon/connect/connect_your_wallet/) to MetaMask.
+6. Select the network you want to interact with (eon or gobi) in MetaMask wallet.
+
+   ![select_network](./docs/images/select_network.png)
+
+7. Connect your MetaMask wallet to the [Web Remix IDE](https://remix.ethereum.org/). Select injected provider in Web Remix IDE
+
+    ![connect_metamask](./docs/images/connect_metamask.png)
+
 8. Open the script you want to run
-9. Set up the required environment variables in the script
-10. Run the script in the Remix IDE
+
+    ![open_script](./docs/images/open_script.png)
+
+9. Set up the required environment variables in the script if necessary (see below).
+
+    ![set_env_variables](./docs/images/set_env_variables.png)
+
+10. Run the script in the [Web Remix IDE](https://remix.ethereum.org/)
+
+    ![run_script](./docs/images/run_script.png)
 
 ### Required Environment Variables
 
 #### Delegate script
-In the [delegate script](./gist/delegate.js), you will need to set the following environment variables:
+In the [delegate script](./remix/delegate.js), you will need to set the following environment variables:
 - `AMOUNT` - The amount of ZEN of the new stake
 - `YOUR_BLOCK_SIGN_PUBKEY` - The public key that will sign the block when forged; populate this with the value of "Block Sign Public Key" from the forger you will delegate to.
 - `YOUR_VRF_PUBKEY` - The "VRF Public Key" from the forger you will delegate to.
 
 #### Withdraw script
-In the [withdraw script](./gist/withdraw.js), you will need to set the following environment variables:
+In the [withdraw script](./remix/withdraw.js), you will need to set the following environment variables:
 - `STAKE_ID` - The stakeId to withdraw
 - `OWNER_ADDRESS` - If owner is different from caller, specify it here. Consider that the owner has to create the signature for the message in order to allow the caller to send the transaction.
 - `OWNER_SIGNED_MESSAGE` - If the owner has already signed the message, paste the signature here. If not, leave it empty and the script will sign the message.
@@ -74,7 +95,7 @@ Follow these steps in order to use the scripts in the [js](./js) folder:
 - `GAS_LIMIT` - The gas limit for the transaction. This value is used for withdraw operation. See notes below.
 
 #### Delegate script
-In ordr to run the delegate operation you will need to set the following environment variables:
+In order to run the delegate operation you will need to set the following environment variables:
 - `AMOUNT_TO_SEND` - The amount of ZEN of the new stake
 - `BLOCK_SIGN_PUBLIC_KEY` - The public key that will sign the block when forged; populate this with the value of "Block Sign Public Key" from the forger you will delegate to.
 - `FORGER_VRF_PUBLIC_KEY` - The "VRF Public Key" from the forger you will delegate to.
@@ -88,12 +109,11 @@ In order to run the withdraw operation you will need to set the following enviro
 
 ## Notes
 
-
 ### Withdraw operation
 
 Withdraw operation has two known issues:
 
-- It requires to sign a message with the owner private key. This implies that, if using MetaMask to sign (gist), _eth_sign_ needs to be enabled in MetaMask.
+- It requires to sign a message with the owner private key. This implies that, if using MetaMask to sign (remix), _eth_sign_ needs to be enabled in MetaMask.
 - The message to sign requires to be hashed with `web3.utils.sha3()` algorithm, which is not the same algorithm used by `web3.eth.accounts.sign()`.
 - The gas limit calculation fails, so a static value needs to be used. The script will use the value set in the .env file, but it may not be enough. If the transaction fails with an out of gas error, the script will print the gas used in the failed transaction. You can use that value to set the GAS_LIMIT in the .env file and try again.
 

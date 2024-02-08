@@ -20,9 +20,9 @@ This repository contains the code to interact with smart contracts deployed on E
 Horizen ecosystem.
 
 Each contract has a dedicated folder with the following structure:
-- `gist` - A set of scripts that can be imported into the Remix IDE to interact with the smart contract.
-- `js` - A scripts that can be run using Node.js locally to interact with the smart contract.
-- `README.md` - A file that contains instructions on how to use the scripts in the `gist` and `js` folders.
+- `remix` - A set of scripts that can be imported into the [Web Remix IDE](https://remix.ethereum.org/) to interact with the smart contract.
+- `js` - A script that can be run using Node.js locally to interact with the smart contract.
+- `README.md` - A file that contains instructions on how to use the scripts in the `remix` and `js` folders.
 
 ## Contracts
 
