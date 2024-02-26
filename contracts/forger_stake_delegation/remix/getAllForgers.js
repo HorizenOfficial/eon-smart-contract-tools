@@ -2,9 +2,10 @@
 (async () => {
   try {
     console.log('Running forging stake script - getAllForgersStakes...');
-    const address = "0x0000000000000000000022222222222222222222";
+    // This is the contract address for the Forger Stake Delegation contract. DO NOT CHANGE THIS VALUE.
+    const contractAddress = "0x0000000000000000000022222222222222222222";
     const abi = require("./abi/forger_stake_delegation.json");
-    const contract = new web3.eth.Contract(abi, address);
+    const contract = new web3.eth.Contract(abi, contractAddress);
 
     await contract.methods.getAllForgersStakes().call().then(console.log);
 
