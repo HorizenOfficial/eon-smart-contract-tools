@@ -3,17 +3,19 @@
   try {
     console.log('Running forging stake script - withdraw...');
 
-    // Set the following values:
+    // ##### ONLY SET THE FOLLOWING VALUES #####
     const STAKE_ID = "";
     const OWNER_ADDRESS = "";        // If owner is different from caller, specify it here. consider that the owner has to create the signature for the message in order to allow the caller to send the transaction.
     const OWNER_SIGNED_MESSAGE = ""; // If the owner has already signed the message, paste the signature here. If not, leave it empty and the script will sign the message.
+    // ##### DO NOT MAKE ANY MORE CHANGES TO THE SCRIPT #####
 
-    const address = "0x0000000000000000000022222222222222222222";
+    // This is the contract address for the Forger Stake Delegation contract. DO NOT CHANGE THIS VALUE.
+    const contractAddress = "0x0000000000000000000022222222222222222222";
     const accounts = await web3.eth.getAccounts();
     const callerAddress = accounts[0];
     const ownerAddress = !OWNER_ADDRESS ? callerAddress : OWNER_ADDRESS;
     const abi = require("./abi/forger_stake_delegation.json");
-    const contract = new web3.eth.Contract(abi, address, {from: callerAddress});
+    const contract = new web3.eth.Contract(abi, contractAddress, {from: callerAddress});
 
     let signature = OWNER_SIGNED_MESSAGE;
     if (!signature) {

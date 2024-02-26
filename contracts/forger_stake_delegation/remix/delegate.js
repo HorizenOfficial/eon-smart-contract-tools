@@ -4,15 +4,19 @@
     console.log('Running forging stake script - delegate...');
 
     // Select one existing forger, or create your own and set the following values:
+
+    // ##### ONLY SET THE FOLLOWING VALUES #####
     const AMOUNT = 0.00;              // Amount of ZEN of the new stake
     const YOUR_BLOCK_SIGN_PUBKEY = ""; // The public key that will sign the block when forged; populate this with the value of "Block Sign Public Key" from the forger you will delegate to.
     const YOUR_VRF_PUBKEY = "";        // The "VRF Public Key" of the forger you will delegate to.
+    // ##### DO NOT MAKE ANY MORE CHANGES TO THE SCRIPT #####
 
-    const address = "0x0000000000000000000022222222222222222222";
+    // This is the contract address for the Forger Stake Delegation contract. DO NOT CHANGE THIS VALUE.
+    const contractAddress = "0x0000000000000000000022222222222222222222";
     const accounts = await web3.eth.getAccounts();
     const ownerAddress = accounts[0];
     const abi = require("./abi/forger_stake_delegation.json");
-    const contract = new web3.eth.Contract(abi, address, {from: ownerAddress});
+    const contract = new web3.eth.Contract(abi, contractAddress, {from: ownerAddress});
     console.log('Account ' + ownerAddress);
 
     const value = AMOUNT *10**18;
