@@ -166,10 +166,10 @@ const prepareWithdrawData = async (web3, contract, callerAddress, stakeId, owner
     r = signatureObject.r;
     s = signatureObject.s;
   } else {
-    console.log('Signature: "'+ signature);
-    r = '0x'+signature.substring(2, 66);
-    s = '0x'+signature.substring(66,130);
-    v = '0x'+signature.substring(130,132);
+    console.log('Signature: "' + signature);
+    r = '0x' + signature.substring(2, 66);
+    s = '0x' + signature.substring(66, 130);
+    v = '0x' + signature.substring(130, 132);
   }
 
   return contract.methods.withdraw(stakeId, v, r, s).encodeABI();
@@ -194,6 +194,43 @@ const withdraw = async () => {
   await signAndSend(web3, contract, data, value, gasLimit);
 }
 
+const stakeOf = async () => {
+  console.log("\nRunning stakeOf script...");
+  validateEnvVars(
+    "stakeOf",
+    ["NETWORK", "OWNER_ADDRESS"]
+  );
+  const ownerAddress = process.env.OWNER_ADDRESS;
+  const {contract} = initializeWeb3AndContract();
+  await contract.methods.stakeOf(ownerAddress).call().then(console.log);
+}
+
+const getPagedForgersStakes = async () => {
+  console.log("\nRunning getPagedForgersStakes script...");
+  validateEnvVars(
+    "getPagedForgersStakes",
+    ["NETWORK"]
+  );
+  const startIndex = process.env.START_INDEX ? Number.parseInt((Number(process.env.START_INDEX)).toFixed(0), 10) : 0;
+  const pageSize = process.env.PAGE_SIZE ? Number.parseInt((Number(process.env.PAGE_SIZE)).toFixed(0), 10) : 0;
+
+  const {contract} = initializeWeb3AndContract();
+  await contract.methods.getPagedForgersStakes(startIndex, pageSize).call().then(console.log);
+}
+
+const getPagedForgersStakesByUser = async () => {
+  console.log("\nRunning getPagedForgersStakesByUser script...");
+  validateEnvVars(
+    "getPagedForgersStakesByUser",
+    ["NETWORK", "OWNER_ADDRESS"]
+  );
+  const ownerAddress = process.env.OWNER_ADDRESS;
+  const startIndex = process.env.START_INDEX ? Number.parseInt((Number(process.env.START_INDEX)).toFixed(0), 10) : 0;
+  const pageSize = process.env.PAGE_SIZE ? Number.parseInt((Number(process.env.PAGE_SIZE)).toFixed(0), 10) : 10;
+  const {contract} = initializeWeb3AndContract();
+  await contract.methods.getPagedForgersStakesByUser(ownerAddress, startIndex, pageSize).call().then(console.log);
+}
+
 const run = async () => {
   const operation = await getOperation();
   console.log(`Operation: ${operation}`);
@@ -207,6 +244,15 @@ const run = async () => {
         break;
       case "withdraw":
         await withdraw();
+        break;
+      case "stakeOf":
+        await stakeOf();
+        break;
+      case "getPagedForgersStakes":
+        await getPagedForgersStakes();
+        break;
+      case "getPagedForgersStakesByUser":
+        await getPagedForgersStakesByUser();
         break;
       default:
         console.log("Invalid operation");
