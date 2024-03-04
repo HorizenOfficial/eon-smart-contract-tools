@@ -124,18 +124,18 @@ In order to run the withdraw operation you will need to set the following enviro
 
 #### StakeOf script
 In order to run the stakeOf operation you will need to set the following environment variables:
-- `OWNER_ADDRESS` - Address to get stake from.
+- `STAKE_OF_OWNER_ADDRESS` - Address to get stake from.
 
 #### getPagedForgersStakes script
 In order to run the getPagedForgersStakes operation you will need to set the following environment variables:
-- `START_INDEX` - Index to start from. Default is 0.
-- `PAGE_SIZE` - Page size to return. Default is 10.
+- `PFS_START_INDEX` - Index to start from. Default is 0.
+- `PFS_PAGE_SIZE` - Page size to return. Default is 10.
 
 #### getPagedForgersStakesByUser script
 In order to run the getPagedForgersStakesByUser operation you will need to set the following environment variables:
-- `OWNER_ADDRESS` - Address to get stakes from.
-- `START_INDEX` - Index to start from. Default is 0.
-- `PAGE_SIZE` - Page size to return. Default is 10.
+- `PFSBU_OWNER_ADDRESS` - Address to get stakes from.
+- `PFSBU_START_INDEX` - Index to start from. Default is 0.
+- `PFSBU_PAGE_SIZE` - Page size to return. Default is 10.
 
 ## Notes
 
