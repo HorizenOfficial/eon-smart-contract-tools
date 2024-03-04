@@ -49,13 +49,16 @@ const getOperation = () => {
       1: "getAllForgerStakes",
       2: "delegate",
       3: "withdraw",
-      4: "exit"
+      4: "stakeOf",
+      5: "getPagedForgersStakes",
+      6: "getPagedForgersStakesByUser",
+      7: "exit"
     };
-    rl.question("Please chose one of the following operations: 1. getAllForgerStakes, 2. delegate, 3. withdraw, 4. exit\n", (answer) => {
+    rl.question("Please chose one of the following operations: 1. getAllForgerStakes, 2. delegate, 3. withdraw, 4. stakeOf, 5. getPagedForgersStakes, 6. getPagedForgersStakesByUser, 7. exit\n", (answer) => {
       const operation = operations[answer];
       rl.close();
       if (!operation) {
-        console.log("Invalid operation, please type one of the following numbers: 1, 2, or 3\n");
+        console.log("Invalid operation, please type one of the following numbers: 1, 2, 3, 4, 5, 6 or 7\n");
         resolve(getOperation());
       } else if (operation === "exit") {
         console.log("Exiting...");
@@ -198,9 +201,9 @@ const stakeOf = async () => {
   console.log("\nRunning stakeOf script...");
   validateEnvVars(
     "stakeOf",
-    ["NETWORK", "OWNER_ADDRESS"]
+    ["NETWORK", "STAKE_OF_OWNER_ADDRESS"]
   );
-  const ownerAddress = process.env.OWNER_ADDRESS;
+  const ownerAddress = process.env.STAKE_OF_OWNER_ADDRESS;
   const {contract} = initializeWeb3AndContract();
   await contract.methods.stakeOf(ownerAddress).call().then(console.log);
 }
@@ -211,8 +214,8 @@ const getPagedForgersStakes = async () => {
     "getPagedForgersStakes",
     ["NETWORK"]
   );
-  const startIndex = process.env.START_INDEX ? Number.parseInt((Number(process.env.START_INDEX)).toFixed(0), 10) : 0;
-  const pageSize = process.env.PAGE_SIZE ? Number.parseInt((Number(process.env.PAGE_SIZE)).toFixed(0), 10) : 0;
+  const startIndex = process.env.PFS_START_INDEX ? Number.parseInt((Number(process.env.PFS_START_INDEX)).toFixed(0), 10) : 0;
+  const pageSize = process.env.PFS_PAGE_SIZE ? Number.parseInt((Number(process.env.PFS_PAGE_SIZE)).toFixed(0), 10) : 10;
 
   const {contract} = initializeWeb3AndContract();
   await contract.methods.getPagedForgersStakes(startIndex, pageSize).call().then(console.log);
@@ -222,11 +225,11 @@ const getPagedForgersStakesByUser = async () => {
   console.log("\nRunning getPagedForgersStakesByUser script...");
   validateEnvVars(
     "getPagedForgersStakesByUser",
-    ["NETWORK", "OWNER_ADDRESS"]
+    ["NETWORK", "PFSBU_OWNER_ADDRESS"]
   );
-  const ownerAddress = process.env.OWNER_ADDRESS;
-  const startIndex = process.env.START_INDEX ? Number.parseInt((Number(process.env.START_INDEX)).toFixed(0), 10) : 0;
-  const pageSize = process.env.PAGE_SIZE ? Number.parseInt((Number(process.env.PAGE_SIZE)).toFixed(0), 10) : 10;
+  const ownerAddress = process.env.PFSBU_OWNER_ADDRESS;
+  const startIndex = process.env.PFSBU_START_INDEX ? Number.parseInt((Number(process.env.PFSBU_START_INDEX)).toFixed(0), 10) : 0;
+  const pageSize = process.env.PFSBU_PAGE_SIZE ? Number.parseInt((Number(process.env.PFSBU_PAGE_SIZE)).toFixed(0), 10) : 10;
   const {contract} = initializeWeb3AndContract();
   await contract.methods.getPagedForgersStakesByUser(ownerAddress, startIndex, pageSize).call().then(console.log);
 }
