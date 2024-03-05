@@ -61,6 +61,21 @@ In the [withdraw script](./remix/withdraw.js), you will need to set the followin
 - `OWNER_ADDRESS` - If owner is different from caller, specify it here. Consider that the owner has to create the signature for the message in order to allow the caller to send the transaction.
 - `OWNER_SIGNED_MESSAGE` - If the owner has already signed the message, paste the signature here. If not, leave it empty and the script will sign the message.
 
+#### StakeOf script
+In the [stakeOf script](./remix/stakeOf.js) you will need to set the following environment variables:
+- `OWNER_ADDRESS` - Address to get stake from.
+
+#### getPagedForgersStakes script
+In the [getPagedForgersStakes](./remix/getPagedForgersStakes.js) script you will need to set the following environment variables:
+- `START_INDEX` - Index to start from. Default is 0.
+- `PAGE_SIZE` - Page size to return. Default is 10.
+
+#### getPagedForgersStakesByUser script
+In the [getPagedForgersStakesByUser](./remix/getPagedForgersStakesByUser.js) script you will need to set the following environment variables:
+- `OWNER_ADDRESS` - Address to get stakes from.
+- `START_INDEX` - Index to start from. Default is 0.
+- `PAGE_SIZE` - Page size to return. Default is 10.
+
 ## JS
 
 In order to use the scripts in the [js](./js) folder, you will need to have Node.js installed on your machine. 
@@ -106,6 +121,21 @@ In order to run the withdraw operation you will need to set the following enviro
 - `OWNER_ADDRESS` - Optional. If not set, it will be the same as FROM_ADDRESS.
 - `OWNER_PRIVATE_KEY` - Optional. If not set, it will be the same as PRIVATE_KEY. If OWNER_SIGNED_MESSAGE is set, it will be ignored. 
 - `OWNER_SIGNED_MESSAGE` - Optional. If the owner has already signed the message, paste the signature here, it will be used instead of signing the message with OWNER_PRIVATE_KEY. If not, leave it empty and the script will sign the message.
+
+#### StakeOf script
+In order to run the stakeOf operation you will need to set the following environment variables:
+- `STAKE_OF_OWNER_ADDRESS` - Address to get stake from.
+
+#### getPagedForgersStakes script
+In order to run the getPagedForgersStakes operation you will need to set the following environment variables:
+- `PFS_START_INDEX` - Index to start from. Default is 0.
+- `PFS_PAGE_SIZE` - Page size to return. Default is 10.
+
+#### getPagedForgersStakesByUser script
+In order to run the getPagedForgersStakesByUser operation you will need to set the following environment variables:
+- `PFSBU_OWNER_ADDRESS` - Address to get stakes from.
+- `PFSBU_START_INDEX` - Index to start from. Default is 0.
+- `PFSBU_PAGE_SIZE` - Page size to return. Default is 10.
 
 ## Notes
 
