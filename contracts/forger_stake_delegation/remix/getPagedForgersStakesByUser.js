@@ -1,7 +1,7 @@
 // Right-click on the script name and hit "Run" to execute
 (async () => {
   try {
-    console.log('Running forging stake script - getPagedForgersStakes...');
+    console.log('Running forging stake script - getPagedForgersStakesByUser...');
 
     // ##### ONLY SET THE FOLLOWING VALUES #####
     const OWNER_ADDRESS = "";       // If owner is different from caller, specify it here.
@@ -18,7 +18,12 @@
     const abi = require("./abi/forger_stake_delegation.json");
     const contract = new web3.eth.Contract(abi, contractAddress);
 
-    await contract.methods.getPagedForgersStakes(ownerAddress, START_INDEX, PAGE_SIZE).call().then(console.log);
+    await contract.methods.getPagedForgersStakesByUser(ownerAddress, START_INDEX, PAGE_SIZE).call().then(response => {
+      console.log({
+        nextStake: response["0"],
+        stakes: response["1"]
+      })
+    });
 
   } catch (e) {
     console.log("Error:" + e.message);
