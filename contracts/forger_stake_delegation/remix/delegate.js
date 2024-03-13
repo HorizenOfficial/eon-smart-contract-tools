@@ -19,7 +19,7 @@
     const contract = new web3.eth.Contract(abi, contractAddress, {from: ownerAddress});
     console.log('Account ' + ownerAddress);
 
-    const value = web3.utils.toWei(AMOUNT, "ether");
+    const value = web3.utils.toWei(AMOUNT.toString(), "ether");
     const blockSignPublicKey = "0x" + YOUR_BLOCK_SIGN_PUBKEY;
     const forgerVrfPublicKey = "0x" + YOUR_VRF_PUBKEY;
     const first32BytesForgerVrfPublicKey = forgerVrfPublicKey.substring(0, 66);
