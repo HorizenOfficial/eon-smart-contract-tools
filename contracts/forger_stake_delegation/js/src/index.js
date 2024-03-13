@@ -107,8 +107,14 @@ const getAllForgerStakes = async () => {
 
 const prepareDelegateData = (contract, address) => {
   console.log("\nPreparing delegate data...");
-  const blockSignPublicKey = "0x" + process.env.BLOCK_SIGN_PUBLIC_KEY;
-  const forgerVrfPublicKey = "0x" + process.env.FORGER_VRF_PUBLIC_KEY;
+  let blockSignPublicKey = process.env.BLOCK_SIGN_PUBLIC_KEY;
+  let forgerVrfPublicKey = process.env.FORGER_VRF_PUBLIC_KEY;
+  if (!blockSignPublicKey.startsWith("0x")) {
+    blockSignPublicKey = "0x" + blockSignPublicKey;
+  }
+  if (!forgerVrfPublicKey.startsWith("0x")) {
+    forgerVrfPublicKey = "0x" + forgerVrfPublicKey;
+  }
   const first32BytesForgerVrfPublicKey = forgerVrfPublicKey.substring(0, 66);
   const lastByteForgerVrfPublicKey = "0x" + forgerVrfPublicKey.substring(66, 68);
 
@@ -123,7 +129,7 @@ const delegate = async () => {
   );
   const {contract, web3} = initializeWeb3AndContract();
   const address = process.env.FROM_ADDRESS;
-  const value = Number.parseInt((Number(process.env.AMOUNT_TO_SEND) * 10 ** 18).toFixed(0), 10);
+  const value = web3.utils.toWei(process.env.AMOUNT_TO_SEND, "ether");
   const data = prepareDelegateData(contract, address);
   await signAndSend(web3, contract, data, value);
 }

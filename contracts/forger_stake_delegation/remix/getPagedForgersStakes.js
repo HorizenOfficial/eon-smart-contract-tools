@@ -13,7 +13,12 @@
     const abi = require("./abi/forger_stake_delegation.json");
     const contract = new web3.eth.Contract(abi, contractAddress);
 
-    await contract.methods.getPagedForgersStakes(START_INDEX, PAGE_SIZE).call().then(console.log);
+    await contract.methods.getPagedForgersStakes(START_INDEX, PAGE_SIZE).call().then(response => {
+      console.log({
+        nextStake: response["0"],
+        stakes: response["1"]
+      })
+    });
 
   } catch (e) {
     console.log("Error:" + e.message);
