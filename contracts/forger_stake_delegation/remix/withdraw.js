@@ -22,9 +22,17 @@
       // Creating message to sign
       // Nonce is required and has to be represented as byte array
       const nonce = await web3.eth.getTransactionCount(callerAddress);
-      let nonce_s = nonce.toString(16);
-      if (nonce_s.length%2 >0 ){
-        nonce_s = '0' + nonce_s;
+      let pad = 2
+      if (nonce >= 128 && nonce < 32768) {
+      pad = 4
+      } else if (nonce >= 32768 && nonce < 8388608) {
+      pad = 6
+      } else if (nonce >= 8388608 && nonce < 2147483647) {
+      pad = 8
+      } else if (nonce >= 2147483647) {
+      pad = 10
+      }
+      const nonce_s = web3.utils.padLeft(nonce.toString(16), pad)
       }
       const msg = callerAddress + nonce_s + STAKE_ID.substring(2);
       console.log('Message to sign: "' + msg);
