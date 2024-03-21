@@ -1,7 +1,7 @@
 # EON-SMART-CONTRACT-TOOLS
 <p >
     <a href= "https://github.com/HorizenOfficial/eon-smartcontract-tools/releases">
-        <img src="https://img.shields.io/badge/release-1.1.0-red" alt="Releases">
+        <img src="https://img.shields.io/badge/release-1.1.2-red" alt="Releases">
     </a>
     <a href="https://github.com/HorizenOfficial/eon-smartcontract-tools/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/license-MIT-blue" alt="LICENSE-MIT">
