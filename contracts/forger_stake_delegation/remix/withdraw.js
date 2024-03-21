@@ -24,28 +24,27 @@
       const nonce = await web3.eth.getTransactionCount(callerAddress);
       let pad = 2
       if (nonce >= 128 && nonce < 32768) {
-      pad = 4
+        pad = 4
       } else if (nonce >= 32768 && nonce < 8388608) {
-      pad = 6
+        pad = 6
       } else if (nonce >= 8388608 && nonce < 2147483647) {
-      pad = 8
+        pad = 8
       } else if (nonce >= 2147483647) {
-      pad = 10
+        pad = 10
       }
-      const nonce_s = web3.utils.padLeft(nonce.toString(16), pad)
-      }
+      const nonce_s = web3.utils.padLeft(nonce.toString(16), pad);
       const msg = callerAddress + nonce_s + STAKE_ID.substring(2);
       console.log('Message to sign: "' + msg);
       // The owner of the stake has to sign the message
-      signature = await web3.eth.sign(web3.utils.sha3(msg),ownerAddress);
+      signature = await web3.eth.sign(web3.utils.sha3(msg), ownerAddress);
     }
-    console.log('Signature: "'+ signature);
-    const r = '0x'+signature.substring(2, 66);
-    const s = '0x'+signature.substring(66,130);
-    const v = '0x'+signature.substring(130,132);
+    console.log('Signature: "' + signature);
+    const r = '0x' + signature.substring(2, 66);
+    const s = '0x' + signature.substring(66, 130);
+    const v = '0x' + signature.substring(130, 132);
 
     console.log("Sending withdraw transaction...");
-    await contract.methods.withdraw(STAKE_ID,v,r,s).send({value: 0}).then(console.log);
+    await contract.methods.withdraw(STAKE_ID, v, r, s).send({value: 0}).then(console.log);
 
     console.log("Transaction completed.");
 
