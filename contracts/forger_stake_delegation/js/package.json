@@ -1,6 +1,6 @@
 {
   "name": "eon-forger",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "description": "Utility funtions to handle Eon Forgers",
   "main": "index.js",
   "type": "module",
