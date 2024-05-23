@@ -1,7 +1,7 @@
 # EON-SMART-CONTRACT-TOOLS
 <p >
     <a href= "https://github.com/HorizenOfficial/eon-smartcontract-tools/releases">
-        <img src="https://img.shields.io/badge/release-1.1.2-red" alt="Releases">
+        <img src="https://img.shields.io/badge/release-2.0.0-red" alt="Releases">
     </a>
     <a href="https://github.com/HorizenOfficial/eon-smartcontract-tools/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/license-MIT-blue" alt="LICENSE-MIT">
@@ -26,4 +26,5 @@ Each contract has a dedicated folder with the following structure:
 
 ## Contracts
 
-1. [forger_stake_delegation](./contracts/forger_stake_delegation) - Code that allows users to interact with the functions of Forger Stake Delegation smart contract.
+1. [forger_stake_delegation](./contracts/forger_stake_delegation) - Code that allows users to interact with the functions of Forger Stake Delegation smart contract (DEPRECATED).
+2. [forger_stake_v2](./contracts/forger_stake_v2) - Code that allows users to interact with the functions of Forger Stake v2 smart contract.
