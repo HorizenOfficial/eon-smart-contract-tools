@@ -1,5 +1,8 @@
 # Changelog
 
+**2.0.0** (2024-08-05)
+- Forger Stake V2 smart contract.
+
 **1.1.2** (2024-12-03)
 - withdraw script fix, left pad nonce to match the length of the nonce field in the transaction calculated by the node.
 
