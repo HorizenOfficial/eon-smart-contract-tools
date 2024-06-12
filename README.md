@@ -26,5 +26,5 @@ Each contract has a dedicated folder with the following structure:
 
 ## Contracts
 
-1. [forger_stake_delegation](./contracts/forger_stake_delegation) - Code that allows users to interact with the functions of Forger Stake Delegation smart contract (DEPRECATED).
+1. [forger_stake_delegation](./contracts/forger_stake_delegation) - Code that allows users to interact with the functions of Forger Stake Delegation smart contract (WILL BE DEPRECATED AFTER VERSION 1.4.0 IS RELEASED).
 2. [forger_stake_v2](./contracts/forger_stake_v2) - Code that allows users to interact with the functions of Forger Stake v2 smart contract.
