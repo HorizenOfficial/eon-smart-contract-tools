@@ -76,7 +76,7 @@ const signAndSend = async (web3, contract, data, value, gasLimit = null) => {
     from: process.env.FROM_ADDRESS,
     to: contract.options.address,
     maxPriorityFeePerGas: Number.parseInt((Number(process.env.MAX_PRIORITY_FEE_PER_GAS)).toFixed(0), 10),
-    maxFeePerGas: Number.parseInt((Number(process.env.MAX_PRIORITY_FEE_PER_GAS)).toFixed(0), 10),
+    maxFeePerGas: Number.parseInt((Number(process.env.MAX_FEE_PER_GAS)).toFixed(0), 10),
     value: value,
     data: data
   };

@@ -20,6 +20,14 @@ const stringToUint32 = (name, str) => {
   return Number.parseInt(num.toFixed(0), 10);
 };
 
+const validateDelegateAmount = (amount) => {
+  // Regular expression to match a number with up to 8 decimal places
+  const regex = /^-?\d+(\.\d{1,8})?$/;
+  if (!regex.test(amount)) {
+    throw new Error("DELEGATE_AMOUNT must be a number with no more than 8 decimal digits.");
+  }
+};
+
 const validateEnvVars = (operation, envVarsToVerify) => {
   envVarsToVerify.forEach((envVar) => {
     if (!process.env[envVar]) {
@@ -104,7 +112,7 @@ const signAndSend = async (web3, contract, address, privateKey, data, value, gas
     from: address,
     to: contract.options.address,
     maxPriorityFeePerGas: process.env.MAX_PRIORITY_FEE_PER_GAS,
-    maxFeePerGas: process.env.MAX_PRIORITY_FEE_PER_GAS,
+    maxFeePerGas: process.env.MAX_FEE_PER_GAS,
     value: value,
     data: data
   };
@@ -150,7 +158,9 @@ const delegate = async () => {
   const {contract, web3} = initializeWeb3AndContract();
   const address = process.env.DELEGATE_FROM_ADDRESS;
   const privateKey = process.env.DELEGATE_PRIVATE_KEY;
-  const value = web3.utils.toWei(process.env.DELEGATE_AMOUNT, "ether");
+  const DELEGATE_AMOUNT = process.env.DELEGATE_AMOUNT;
+  validateDelegateAmount(DELEGATE_AMOUNT);
+  const value = web3.utils.toWei(DELEGATE_AMOUNT, "ether");
   const {
     blockSignPublicKey,
     first32BytesForgerVrfPublicKey,
