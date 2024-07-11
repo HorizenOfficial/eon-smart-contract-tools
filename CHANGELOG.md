@@ -1,6 +1,7 @@
 # Changelog
 
 **2.0.0+2** (2024-11-07)
+- Removed previous version of the forger stake contract
 - Handle minimal delegation amount value
 - Fix bug in send transaction method
 

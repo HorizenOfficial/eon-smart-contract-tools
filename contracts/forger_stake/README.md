@@ -1,4 +1,4 @@
-# FORGER STAKE V2
+# FORGER STAKE
 
 ## Overview
 
