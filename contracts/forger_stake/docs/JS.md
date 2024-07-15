@@ -22,7 +22,7 @@ In order to use the [index.js](../js/src/index.js) script you will need to set t
 In order to run the _delegate_ operation you will need to set the following environment variables:
 - `DELEGATE_FROM_ADDRESS` - **REQUIRED**. The address that will send the transaction
 - `DELEGATE_PRIVATE_KEY` - **REQUIRED**. The private key of the address that will send the transaction. Required to sign the transaction.
-- `DELEGATE_AMOUNT` - **REQUIRED**. The amount of ZEN of the new stake
+- `DELEGATE_AMOUNT` - **REQUIRED**. The amount of ZEN of the new stake. Minimum amount is 0.00000001. If a number with more than 8 decimal digits is provided the script will fail.
 - `DELEGATE_BLOCK_SIGN_PUBLIC_KEY` - **REQUIRED**. The public key that will sign the block when forged; populate this with the value of "Block Sign Public Key" from the forger you will delegate to.
 - `DELEGATE_VRF_PUBLIC_KEY` - **REQUIRED**. The "VRF Public Key" from the forger you will delegate to.
 

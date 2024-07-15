@@ -1,5 +1,13 @@
 # Changelog
 
+**2.0.0+2** (2024-11-07)
+- Removed previous version of the forger stake contract
+- Handle minimal delegation amount value
+- Fix bug in send transaction method
+
+**2.0.0+1** (2024-11-06)
+- Fix README deprecation message
+
 **2.0.0** (2024-08-05)
 - Forger Stake V2 smart contract.
 
